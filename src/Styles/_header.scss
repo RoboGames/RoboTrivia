@@ -1,0 +1,38 @@
+header{
+    text-align: center;
+    h1{
+        font-family: $headingFont;
+        font-size:7rem;
+        color: $colorPurple;
+    }
+    i{
+        font-size:4rem;
+        color:$colorBlue;
+    }
+}
+
+form{
+    display:flex;
+    flex-direction: column;
+    font-family: $bodyFont;
+    div{
+        display:flex;
+        flex-direction: column;
+        margin:0.8rem;
+    }
+    label{
+        font-size:1.5rem;
+        padding-bottom: 0.4rem;
+    }
+    select{
+        width:15%;
+        margin:0 auto;
+        padding: 0.5rem 0;
+        border-radius: 5px;
+    }
+    option{
+        font-family: $bodyFont;
+        font-size:1rem;
+    }
+}
+
