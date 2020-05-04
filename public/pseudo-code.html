@@ -1,0 +1,37 @@
+<!-- 
+    Landing Header:
+    - Greet user with a h1 header and short descriptor of the game/app rules
+        -Basic Rules: Each player recieves 10 questions, players take turns answering unique questions
+
+    - Three Unique User Input Sections
+        <Create a Form>
+            - Category: drop-down menu of pre-selected trivia categories
+            - Level of Trivia: drop-down menu of three different difficulty levels of trivia
+            - Players: onClick 'add player' button that takes in userName
+        On Submit - Make two API calls - one to fetch trivia questions based on difficulty and category
+                    second API call to display avatars based on number of participants
+                    nameSpace empty arrays questions = [], answers = []
+                    setState for each player; userScore: 0, currentAnswers = [], currentQuestion = []
+                    smooth scroll to Game Area
+        
+    Game Area:
+    - User avatars displayed in a row/column off to the side
+        - Highlight avatar based on which player's turn it is - upon submitting answer move highlighting to next player
+        - User score is updated and displayed under their avatar
+            on submitting an answer update state; userScore++ if correct, update currentAnswer and currentQuestion array for next player
+            Use styling to display if a submitted answer was correct or incorrect (i.e. green/red border highlighting around the answer)
+        - Questions displayed center screen
+            Questions and answers are displayed based on index number recieved from API call
+                (i.e. question 1 is index[0])
+            Users recieves one question at a time and take turns answering
+        - Upon answering final question userName and userScores are pushed to firebase
+
+    Score Area:
+    - Display two tables that display All Time High Scores and the Scores of the Current Game
+        - All Time High Scores:
+            - Pull data from firebase sorted by highest score
+        - Current Game:
+            - Redisplay userScores in a table
+    - Play Again Button
+        onClick: reset State and scroll user back to Landing Header
+-->
