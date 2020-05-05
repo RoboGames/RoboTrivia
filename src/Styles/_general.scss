@@ -1,0 +1,18 @@
+body{
+    font-size: 62.5%;
+    font-family:$bodyFont;
+}
+
+a{
+    text-decoration: none;
+}
+
+li{
+    list-style: none;
+}
+
+.wrapper{
+    margin:0 auto;
+    max-width:1280px;
+    width:85%;
+}
