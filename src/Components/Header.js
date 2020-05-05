@@ -1,6 +1,27 @@
 import React, { Component } from 'react';
 
 class Header extends Component {
+    constructor(){
+        super();
+        this.state = {
+        }
+    }
+
+    handleInput = (e) =>{
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    submitInput = (e) =>{
+        e.preventDefault();
+        if(this.state.category && this.state.difficultyLevel && this.state.numberOfPlayers){
+            this.props.callApiFunc(this.state.category, this.state.difficultyLevel, this.state.numberOfPlayers)
+        }else{
+            alert("Please select all of the criteria.")
+        }
+    }
+
     render(){
     return (
         <header>
@@ -13,7 +34,7 @@ class Header extends Component {
                     <div className = "criteriaSection">
                         <div className = "criteriaType">
                             <label htmlFor="">Choose a Category</label>
-                            <select name="category" id="">
+                            <select name="category" id="" onChange={this.handleInput}>
                                 <option value=''>Choose...</option>
                                 <option value="9">General Knowledge</option>
                                 <option value="17">Science and Nature</option>
@@ -24,16 +45,16 @@ class Header extends Component {
                         </div>
                         <div className = "criteriaType criteriaTypeTwo">
                             <label htmlFor="">Difficulty Level</label>
-                            <select name="difficultyLevel" id="">
+                            <select name="difficultyLevel" id="" onChange={this.handleInput}>
                                 <option value=''>Choose...</option>
-                                <option value="">Easy</option>
-                                <option value="">Medium</option>
-                                <option value="">Hard</option>
+                                <option value="easy">Easy</option>
+                                <option value="medium">Medium</option>
+                                <option value="hard">Hard</option>
                             </select>
                         </div>
                         <div className = "criteriaType">
                         <label htmlFor="">Number of Players</label>
-                        <select name="numberOfPlayer" id="">
+                        <select name="numberOfPlayers" id="" onChange={this.handleInput}>
                             <option value=''>Choose...</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -44,7 +65,7 @@ class Header extends Component {
                         </div>
                     </div>
                     <p>Each player will recieve 10 questions, players take turns answering unique questions</p>
-                    <button className = "button" type="submit">Let's Play</button>
+                    <button className = "button" type="submit" onClick={this.submitInput}>Let's Play</button>
                 </form>
             </div>
         </header>
