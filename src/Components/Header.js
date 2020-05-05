@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
+import Modal from './Modal';
 
 class Header extends Component {
     constructor(){
         super();
         this.state = {
+            showModal: false,
+            numberOfPlayers: null
         }
+    }
+
+    showModal = (e) =>{
+        e.preventDefault();
+        this.setState({
+            showModal: true
+        })
     }
 
     handleInput = (e) =>{
@@ -27,7 +37,6 @@ class Header extends Component {
         <header>
             <div className = "wrapper">
                 {/* */}
-                
                 <img src="" alt=""/>
                 <h1>Robo<i className="fas fa-robot"></i>Trivia</h1>
                 <form action="">
@@ -66,8 +75,13 @@ class Header extends Component {
                     </div>
                     <p>Each player will recieve 10 questions, players take turns answering unique questions</p>
                     <button className = "button" type="submit" onClick={this.submitInput}>Let's Play</button>
+                    <button className = "button" onClick={this.showModal} disabled={!this.state.numberOfPlayers}>Choose Nicknames</button>
                 </form>
             </div>
+            <Modal 
+            showModal = {this.state.showModal}
+            numberOfPlayers = {this.state.numberOfPlayers}
+            />
         </header>
         );
     }
