@@ -1,9 +1,15 @@
 header{
     text-align: center;
+    // background gradient
+    background: rgb(65,234,212);
+    background: linear-gradient(230deg, rgba(65,234,212,0.59) 7%, rgba(185,19,114,0.62) 98%);
+    height: 100vh;
     h1{
         font-family: $headingFont;
         font-size:7rem;
         color: $colorPurple;
+        text-shadow: rgba(255, 252, 168, 0.88) 2px 2px 0px
+        // text-shadow:  rgba(211, 111, 167, 0.747) 5px 2px 2px
     }
     i{
         font-size:4rem;
@@ -14,25 +20,79 @@ header{
 form{
     display:flex;
     flex-direction: column;
-    font-family: $bodyFont;
-    div{
+    align-items: center;
+    .criteriaSection{
+        display: flex;
+        justify-content: center;
+        font-family: $bodyFont;
+    }
+    .criteriaType{
         display:flex;
         flex-direction: column;
-        margin:0.8rem;
+        margin:1rem 2rem;
+        position: relative;
     }
     label{
         font-size:1.5rem;
         padding-bottom: 0.4rem;
     }
     select{
-        width:15%;
+        width:9rem;
         margin:0 auto;
-        padding: 0.5rem 0;
+        padding: 0.5rem;
         border-radius: 5px;
+        // hide default arrow
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    .criteriaType:after{
+        // ---from codepen---
+        content: '\f078';
+        font: normal normal normal 17px/1 FontAwesome;
+        // ----------------
+        font-size: 1rem;
+        color: $colorPurple;
+        right:2rem;
+        top: 2.7rem;
+        position: absolute;
+        pointer-events: none;
+    }
+
+    .criteriaTypeTwo{
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
     option{
         font-family: $bodyFont;
-        font-size:1rem;
+        font-size:0.9rem;
+        
+    }
+    p{
+        font-size: 1rem;
+    }
+    button{
+        font-family: $bodyFont;
+        font-size: 2rem;
+        font-weight: 600;
+        color:$colorPurple;
+        background-color:rgb(143, 228, 216);
+        border: none;
+        border-radius: 5px;
+        padding:0.5rem 0;
+        width:15rem;
+    }
+    button:hover,button:focus{
+        background-color: $colorBlue;
+    }
+}
+
+@media (max-width:600px){
+   .criteriaSection{
+        flex-direction: column;
+    }
+    select{
+        width:15%;
     }
 }
 
