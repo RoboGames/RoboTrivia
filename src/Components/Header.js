@@ -6,7 +6,8 @@ class Header extends Component {
         super();
         this.state = {
             showModal: false,
-            numberOfPlayers: null
+            numberOfPlayers: 1,
+            players: []
         }
     }
 
@@ -17,9 +18,26 @@ class Header extends Component {
         })
     }
 
+    setPlayers = () => {
+        let players = Array(parseInt(this.state.numberOfPlayers)).fill({})
+        this.setState({
+            players: players
+        })
+     }
+
+     getNickname = (e) =>{
+         const playersUpdate = [...this.state.players];
+         playersUpdate[e.target.id] = {nickname:e.target.value, score:0}
+         this.setState({
+             players: playersUpdate
+         })
+     }
+
     handleInput = (e) =>{
         this.setState({
             [e.target.name]: e.target.value
+        }, () =>{
+            this.setPlayers();
         })
     }
 
@@ -81,6 +99,8 @@ class Header extends Component {
             <Modal 
             showModal = {this.state.showModal}
             numberOfPlayers = {this.state.numberOfPlayers}
+            playerArray = {this.state.players}
+            getNicknameFunc = {this.getNickname}
             />
         </header>
         );

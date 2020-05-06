@@ -9,10 +9,13 @@ export default class Modal extends Component {
          <form action="">
             <p>Choose Your Nicknames</p>
             <form action="">
-               {Array(parseInt(this.props.numberOfPlayers)).fill(
-                  <input type="text" name="" id=""/>
-               )}
-               <button class="button">Start Game</button>
+               {
+                  this.props.playerArray.map((player, key) =>{
+                     return(
+                        <input type="text" id = {key} onChange={this.props.getNicknameFunc}/>
+                     )
+                  })
+               }
             </form>
          </form>
       )
