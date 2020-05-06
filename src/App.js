@@ -9,11 +9,13 @@ class App extends Component {
   constructor(){
     super();
     this.state={
-      questionArray:[]
+      questionArray:[],
+      isPlaying: false,
+      randomRobos: []
     }
   }
 
-  callApi = (category, difficulty, numberOfPlayers, players, robos, isPlaying) =>{
+  callApi = (category, difficulty, numberOfPlayers, players, isPlaying) =>{
     console.log(category, difficulty, numberOfPlayers)
     let numberOfQuestions = numberOfPlayers * 5
     console.log(numberOfQuestions)
@@ -27,18 +29,26 @@ class App extends Component {
     }).then((response) => {
       console.log(response);
       this.setState({
+        numberOfPlayers: numberOfPlayers,
         questionArray:response.data,
         players: players,
-        avatars: robos,
         isPlaying: isPlaying
+      }, () =>{
+        this.generateAvatar();
       })
     })
   }
 
-  componentDidMount() {
-    this.callApi()
-
-  }
+  generateAvatar = () => {
+    const robos = [];
+    for (let players = 0; players < this.state.numberOfPlayers; players++) {
+        const randomNumber = Math.floor(Math.random() * 1000);
+        robos.push(randomNumber);
+    }
+    this.setState({
+        randomRobos: robos
+    })
+}
 
 
   render(){
@@ -48,7 +58,11 @@ class App extends Component {
             callApiFunc = {this.callApi}
           />
           <main>
-            <ScoreBar playerData={this.state.players} isPlaying={this.state.isPlaying}/>
+            <ScoreBar
+             playerData={this.state.players} 
+             isPlaying={this.state.isPlaying}
+             avatars = {this.state.randomRobos}
+             />
             <ul>
               {this.state.questionArray.map((question,i)=>{
                 let questionTitle = question.question
