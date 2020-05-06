@@ -12,7 +12,7 @@ class App extends Component {
     }
   }
 
-  callApi = (category, difficulty, numberOfPlayers) =>{
+  callApi = (category, difficulty, numberOfPlayers, players, robos) =>{
     console.log(category, difficulty, numberOfPlayers)
     let numberOfQuestions = numberOfPlayers * 5
     console.log(numberOfQuestions)
@@ -26,9 +26,10 @@ class App extends Component {
     }).then((response) => {
       console.log(response);
       this.setState({
-        questionArray:response.data
+        questionArray:response.data,
+        players: players,
+        avatars: robos
       })
-
     })
   }
 
@@ -36,6 +37,7 @@ class App extends Component {
     this.callApi()
 
   }
+
 
   render(){
     return (

@@ -45,7 +45,7 @@ class Header extends Component {
     submitInput = (e) =>{
         e.preventDefault();
         if(this.state.category && this.state.difficultyLevel && this.state.numberOfPlayers){
-            this.props.callApiFunc(this.state.category, this.state.difficultyLevel, this.state.numberOfPlayers)
+            this.props.callApiFunc(this.state.category, this.state.difficultyLevel, this.state.numberOfPlayers, this.state.players, this.state.randomRobos)
             this.generateAvatar();
         }else{
             alert("Please select all of the criteria.")
