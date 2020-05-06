@@ -7,15 +7,21 @@ class Header extends Component {
         this.state = {
             showModal: false,
             players: [],
-            numberOfPlayers: 1
+            numberOfPlayers: 0
         }
     }
 
     showModal = (e) =>{
         e.preventDefault();
-        this.setState({
-            showModal: true
-        })
+        if(this.state.numberOfPlayers > 0){
+            this.setState({
+                showModal: true
+            })
+        }else{
+            this.setState({
+                showModal: false
+            })
+        }
     }
 
     setPlayers = () => {
@@ -38,6 +44,7 @@ class Header extends Component {
             [e.target.name]: e.target.value
         }, () =>{
             this.setPlayers();
+            this.showModal(e);
         })
     }
 
@@ -81,8 +88,9 @@ class Header extends Component {
                         </div>
                         <div className = "criteriaType">
                         <label htmlFor="">Number of Players</label>
-                        <select name="numberOfPlayers" id="" onChange={this.handleInput}>
-                            <option value='1'>Choose...</option>
+                        <select name="numberOfPlayers" id="" 
+                        onChange={this.handleInput}>
+                            <option value='0'>Choose...</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -90,7 +98,6 @@ class Header extends Component {
                             <option value="5">5</option>
                         </select>
                         </div>
-                        <button className = "button nicknameBtn" onClick={this.showModal} disabled={!this.state.numberOfPlayers}>Choose Nicknames</button>
                     </div>
                     <p>Each player will recieve 10 questions, players take turns answering unique questions</p>
                     <Modal 
