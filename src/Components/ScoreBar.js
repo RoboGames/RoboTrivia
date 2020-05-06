@@ -8,10 +8,13 @@ export class ScoreBar extends Component {
         }else{
             return (
                 <div>
-                    <div>
+                    <div className='scorebar'>
                     {
-                        this.props.avatars.map((robo) => {
-                        return <img src={`https://robohash.org/${robo}`} alt="cool guy"/>
+                        this.props.avatars.map((robo, key) => {
+                        return <div className="playerAvatar">
+                                    <img src={`https://robohash.org/${robo}`} alt="cool guy"/>
+                                    <p>{this.props.playerData[key].nickname}</p>
+                                    <p>Score: {this.props.playerData[key].score}</p></div>
                         })
                     }       
                 </div>

@@ -53,16 +53,16 @@ class App extends Component {
 
   render(){
     return (
-      <div className ="App">
+      <>
           <Header
             callApiFunc = {this.callApi}
           />
-          <main>
+          <main className='gameArea'>
             <ScoreBar
-             playerData={this.state.players} 
-             isPlaying={this.state.isPlaying}
-             avatars = {this.state.randomRobos}
-             />
+              playerData={this.state.players} 
+              isPlaying={this.state.isPlaying}
+              avatars = {this.state.randomRobos}
+            />
             <ul>
               {this.state.questionArray.map((question,i)=>{
                 let questionTitle = question.question
@@ -75,11 +75,10 @@ class App extends Component {
                         </form>
                       </li>
                     )
-
               })}
             </ul>
           </main>
-      </div>
+      </>
     );
   }
 }
