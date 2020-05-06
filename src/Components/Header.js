@@ -1,15 +1,43 @@
 import React, { Component } from 'react';
+import Modal from './Modal';
 
 class Header extends Component {
     constructor(){
         super();
         this.state = {
+            showModal: false,
+            players: [],
+            numberOfPlayers: 1
         }
     }
+
+    showModal = (e) =>{
+        e.preventDefault();
+        this.setState({
+            showModal: true
+        })
+    }
+
+    setPlayers = () => {
+        let players = Array(parseInt(this.state.numberOfPlayers)).fill({})
+        this.setState({
+            players: players
+        })
+     }
+
+     getNickname = (e) =>{
+         const playersUpdate = [...this.state.players];
+         playersUpdate[e.target.id] = {nickname:e.target.value, score:0}
+         this.setState({
+             players: playersUpdate
+         })
+     }
 
     handleInput = (e) =>{
         this.setState({
             [e.target.name]: e.target.value
+        }, () =>{
+            this.setPlayers();
         })
     }
 
@@ -27,7 +55,6 @@ class Header extends Component {
         <header>
             <div className = "wrapper">
                 {/* */}
-                
                 <img src="" alt=""/>
                 <h1>Robo<i className="fas fa-robot"></i>Trivia</h1>
                 <form action="">
@@ -55,7 +82,7 @@ class Header extends Component {
                         <div className = "criteriaType">
                         <label htmlFor="">Number of Players</label>
                         <select name="numberOfPlayers" id="" onChange={this.handleInput}>
-                            <option value=''>Choose...</option>
+                            <option value='1'>Choose...</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -63,8 +90,15 @@ class Header extends Component {
                             <option value="5">5</option>
                         </select>
                         </div>
+                        <button className = "button nicknameBtn" onClick={this.showModal} disabled={!this.state.numberOfPlayers}>Choose Nicknames</button>
                     </div>
                     <p>Each player will recieve 10 questions, players take turns answering unique questions</p>
+                    <Modal 
+                    showModal = {this.state.showModal}
+                    numberOfPlayers = {this.state.numberOfPlayers}
+                    playerArray = {this.state.players}
+                    getNicknameFunc = {this.getNickname}
+                    />
                     <button className = "button" type="submit" onClick={this.submitInput}>Let's Play</button>
                 </form>
             </div>
