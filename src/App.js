@@ -8,26 +8,73 @@ class App extends Component {
   constructor(){
     super();
     this.state={
-      questionArray:[]
+      resultsArray:[],
+      questionArray:[],
+      choiceArray:[],
     }
   }
+
+
+  //  Answer Array
+  answerLibrary = (resultsArray)=>{
+    const choiceTemp = []
+     resultsArray.forEach((result,i)=>{
+      //  push incorrect choices in to the choice array
+       choiceTemp.push(result.incorrect_answers);
+
+       const numberOfChoices = result.incorrect_answers.length +1
+      
+      //  randomizing function to randomize the correct answer index
+       let correctAnswerIndex = Math.floor(Math.random() * numberOfChoices);
+
+      // add correct answer in a random position of the choice array
+       choiceTemp[i].splice(correctAnswerIndex, 0 , result.correct_answer)
+
+       this.setState({
+         choiceArray:choiceTemp
+       })
+     })
+  }
+
+
+  // QuestionArray
+  questionLibrary = (resultsArray) => {
+    const questionTemp =[]
+    resultsArray.forEach((result, i) => {
+      questionTemp.push({
+        question: result.question,
+        choices: this.state.choiceArray,
+        
+      })
+      this.setState({
+        questionArray: questionTemp
+      })
+      
+    })
+    console.log(this.state.choiceArray)
+  }
+
 
   callApi = (category, difficulty, numberOfPlayers) =>{
     console.log(category, difficulty, numberOfPlayers)
     let numberOfQuestions = numberOfPlayers * 5
-    console.log(numberOfQuestions)
     axios({
-      url: 'http://jservice.io/api/clues',
-      method:'GET',
+      url: 'https://opentdb.com/api.php',
       params: {
         category: category,
-        value:difficulty
+        amount: numberOfQuestions,
+        type:'multiple',
+        difficulty:difficulty
       }
     }).then((response) => {
       console.log(response);
+
       this.setState({
-        questionArray:response.data
+        resultsArray:response.data.results,
+      
       })
+      const questionLibrary = this.questionLibrary(this.state.resultsArray)
+      const answerLibrary = this.answerLibrary(this.state.resultsArray)
 
     })
   }
@@ -43,7 +90,7 @@ class App extends Component {
           <Header
             callApiFunc = {this.callApi}
           />
-          <main>
+          {/* <main>
             <ul>
               {this.state.questionArray.map((question,i)=>{
                 let questionTitle = question.question
@@ -59,7 +106,7 @@ class App extends Component {
 
               })}
             </ul>
-          </main>
+          </main> */}
       </div>
     );
   }
