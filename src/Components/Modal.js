@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 
 export default class Modal extends Component {
    render() {
@@ -9,13 +9,18 @@ export default class Modal extends Component {
          <form action="">
             <p>Choose Your Nicknames</p>
             <form action="">
-               {
-                  this.props.playerArray.map((player, key) =>{
-                     return(
-                        <input type="text" id = {key} onChange={this.props.getNicknameFunc}/>
-                     )
-                  })
-               }
+               <div className="criteriaSection">
+                  {
+                     this.props.playerArray.map((player, key) =>{
+                        return(
+                           <Fragment>
+                              <label htmlFor="name" className='sr-only'>Player {key + 1}</label>
+                              <input type="text" id = {key} onChange={this.props.getNicknameFunc} className="nickname" name="player" placeholder = {"Player " + (key + 1)}/>
+                           </Fragment>
+                        )
+                     })
+                  }
+               </div>
             </form>
          </form>
       )

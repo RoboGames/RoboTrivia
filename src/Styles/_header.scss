@@ -32,11 +32,13 @@ form{
         margin:1rem 2rem;
         position: relative;
     }
+
     label{
         font-size:1.5rem;
         padding-bottom: 0.4rem;
     }
-    select{
+    
+    select, .nickname{
         width:9rem;
         margin:0 auto;
         padding: 0.5rem;
@@ -45,6 +47,9 @@ form{
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
+    }
+    .nickname{
+        margin: 0.5rem;
     }
     .criteriaType:after{
         // ---from codepen---
@@ -85,6 +90,16 @@ form{
     }
     button:hover,button:focus{
         background-color: $colorBlue;
+    }
+    .nicknameBtn{
+        font-size: 1.0rem;
+        padding: 0.25rem;
+        width: 7.5rem;
+        margin: 0.5rem;
+    }
+    .nicknameBtn:disabled{
+        background-color:gray;
+        color:lightGray;
     }
 }
 
