@@ -91,16 +91,6 @@ form{
     button:hover,button:focus{
         background-color: $colorBlue;
     }
-    .nicknameBtn{
-        font-size: 1.0rem;
-        padding: 0.25rem;
-        width: 7.5rem;
-        margin: 0.5rem;
-    }
-    .nicknameBtn:disabled{
-        background-color:gray;
-        color:lightGray;
-    }
 }
 
 @media (max-width:600px){
