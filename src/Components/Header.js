@@ -7,7 +7,8 @@ class Header extends Component {
         this.state = {
             showModal: false,
             players: [],
-            numberOfPlayers: 1
+            numberOfPlayers: 1,
+            randomRobos: []
         }
     }
 
@@ -23,15 +24,15 @@ class Header extends Component {
         this.setState({
             players: players
         })
-     }
+    }
 
-     getNickname = (e) =>{
-         const playersUpdate = [...this.state.players];
-         playersUpdate[e.target.id] = {nickname:e.target.value, score:0}
-         this.setState({
-             players: playersUpdate
-         })
-     }
+    getNickname = (e) =>{
+        const playersUpdate = [...this.state.players];
+        playersUpdate[e.target.id] = {nickname:e.target.value, score:0}
+        this.setState({
+            players: playersUpdate
+        })
+    }
 
     handleInput = (e) =>{
         this.setState({
@@ -45,10 +46,23 @@ class Header extends Component {
         e.preventDefault();
         if(this.state.category && this.state.difficultyLevel && this.state.numberOfPlayers){
             this.props.callApiFunc(this.state.category, this.state.difficultyLevel, this.state.numberOfPlayers)
+            this.generateAvatar();
         }else{
             alert("Please select all of the criteria.")
         }
     }
+
+    generateAvatar = () => {
+        const robos = [];
+        for (let players = 0; players < this.state.numberOfPlayers; players++) {
+            const randomNumber = Math.floor(Math.random() * 1000);
+            robos.push(randomNumber);
+        }
+        this.setState({
+            randomRobos: robos
+        })
+    }
+
 
     render(){
     return (
@@ -101,6 +115,13 @@ class Header extends Component {
                     />
                     <button className = "button" type="submit" onClick={this.submitInput}>Let's Play</button>
                 </form>
+            </div>
+            <div>
+                {
+                    this.state.randomRobos.map((robo) => {
+                    return <img src={`https://robohash.org/${robo}`} alt="cool guy"/>
+                    })
+                }       
             </div>
         </header>
         );
