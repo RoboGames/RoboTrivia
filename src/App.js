@@ -11,11 +11,12 @@ class App extends Component {
     this.state={
       resultsArray:[],
       questionArray:[],
+      choiceArray:[],
       currentQuestion:'',
+      currentAnswers:[],
       questionArray: [],
       isPlaying: false,
-      randomRobos: [],
-      currentQuestion:0
+      randomRobos: []
     }
   }
 
@@ -24,32 +25,37 @@ class App extends Component {
   choiceLibrary = (result)=>{
     //  push incorrect choices in to the choice array
     const choiceTemp = result.incorrect_answers
+
     const numberOfChoices = result.incorrect_answers.length + 1
+
     //  randomizing function to randomize the correct answer index
-    const randomIndex = Math.floor(Math.random() * numberOfChoices);
+    let randomIndex = Math.floor(Math.random() * numberOfChoices);
+
     // add correct answer in a random position of the choice array
     choiceTemp.splice(randomIndex, 0, result.correct_answer)
+
+    // this.setState({
+    //   choiceArray: choiceTemp
+    // })
     return choiceTemp
   }
 
-  populateChoices = () =>{
-    const choiceLibrary = []
-    this.state.resultsArray.map((result, i) =>{
-      choiceLibrary.push({
-        question: result.question,
-        choices: this.choiceLibrary(result),
-        correct_answer: result.correct_answer
-      })
-    })
-    this.setState({
-      renderQuestions: choiceLibrary
-    })
-  }
 
+  // // QuestionArray
+  // questionLibrary = (resultsArray) => {
+  //   const questionTemp =[]
+  //   resultsArray.forEach((result, i) => {
+  //     questionTemp.push(result.question)
+  //     this.setState({
+  //       questionArray: questionTemp,
+  //       })
+  //   })
+  // }
 
 
 
   callApi = (category, difficulty, numberOfPlayers, players, isPlaying) =>{
+    console.log(category, difficulty, numberOfPlayers)
     let numberOfQuestions = numberOfPlayers * 5
     axios({
       url: 'https://opentdb.com/api.php',
@@ -60,15 +66,17 @@ class App extends Component {
         difficulty:difficulty
       }
     }).then((response) => {
+      console.log(response);
+
       this.setState({
         resultsArray:response.data.results,
+      
         numberOfPlayers: numberOfPlayers,
         questionArray:response.data,
         players: players,
         isPlaying: isPlaying
       }, () =>{
         this.generateAvatar();
-        this.populateChoices();
       })
     })
   }
@@ -98,7 +106,26 @@ class App extends Component {
               avatars = {this.state.randomRobos}
             />
             <ul>
+              {this.state.resultsArray.map((result,i)=>{
+                let choices = this.choiceLibrary(result)
+                console.log(choices)
+                let questionTitle = result.question
+                    return (
+                      <li className="questionContainer" key={i}>
+                        <h2>{questionTitle}</h2>
+                        <ul className = "answerContainer">
+                          {choices.map((choice)=>{
+                            return(
+                              <li>
+                                <button>{choice}</button>
+                              </li>
 
+                            )
+                          })}
+                        </ul>
+                      </li>
+                    )
+              })}
             </ul>
           </main>
       </>
