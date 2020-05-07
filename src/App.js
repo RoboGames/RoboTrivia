@@ -12,12 +12,18 @@ class App extends Component {
     this.state={
       resultsArray:[],
       questionArray:[],
-      currentQuestion:'',
-      questionArray: [],
       isPlaying: false,
       randomRobos: [],
-      currentPlayer:''
+      currentPlayer:'',
+      renderQuestions:[]
     }
+    this.gameRef = React.createRef();
+  }
+
+  // smooth scroll to game section
+  smoothScroll = () => {
+    let element = this.gameRef.current
+    element.scrollIntoView({beahvior:'smooth',block:'start'})
   }
 
 
@@ -71,6 +77,10 @@ class App extends Component {
         this.generateAvatar();
         this.populateChoices();
       })
+
+      if(this.state.resultsArray.length > 0){
+        this.smoothScroll();
+      }
     })
   }
 
@@ -92,7 +102,7 @@ class App extends Component {
           <Header
             callApiFunc = {this.callApi}
           />
-          <main className='gameArea'>
+          <main className='gameArea' ref={this.gameRef}>
             <ScoreBar
               playerData={this.state.players} 
               isPlaying={this.state.isPlaying}
@@ -100,6 +110,7 @@ class App extends Component {
             />
             <GameArea 
             playerData={this.state.players} 
+            renderQuestions = {this.state.renderQuestions}
             />
           </main>
       </>
