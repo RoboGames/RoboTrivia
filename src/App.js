@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from './Components/Header';
+import ScoreBar from './Components/ScoreBar'
 import './Styles/styles.scss';
 
 import axios from 'axios';
@@ -12,7 +13,10 @@ class App extends Component {
       questionArray:[],
       choiceArray:[],
       currentQuestion:'',
-      currentAnswers:[]
+      currentAnswers:[],
+      questionArray: [],
+      isPlaying: false,
+      randomRobos: []
     }
   }
 
@@ -50,8 +54,7 @@ class App extends Component {
 
 
 
-
-  callApi = (category, difficulty, numberOfPlayers) =>{
+  callApi = (category, difficulty, numberOfPlayers, players, isPlaying) =>{
     console.log(category, difficulty, numberOfPlayers)
     let numberOfQuestions = numberOfPlayers * 5
     axios({
@@ -68,17 +71,40 @@ class App extends Component {
       this.setState({
         resultsArray:response.data.results,
       
+        numberOfPlayers: numberOfPlayers,
+        questionArray:response.data,
+        players: players,
+        isPlaying: isPlaying
+      }, () =>{
+        this.generateAvatar();
       })
     })
   }
 
+  generateAvatar = () => {
+    const robos = [];
+    for (let players = 0; players < this.state.numberOfPlayers; players++) {
+        const randomNumber = Math.floor(Math.random() * 1000);
+        robos.push(randomNumber);
+    }
+    this.setState({
+        randomRobos: robos
+    })
+}
+
+
   render(){
     return (
-      <div className ="App">
+      <>
           <Header
             callApiFunc = {this.callApi}
           />
-          <main>
+          <main className='gameArea'>
+            <ScoreBar
+              playerData={this.state.players} 
+              isPlaying={this.state.isPlaying}
+              avatars = {this.state.randomRobos}
+            />
             <ul>
               {this.state.resultsArray.map((result,i)=>{
                 let choices = this.choiceLibrary(result)
@@ -99,11 +125,10 @@ class App extends Component {
                         </ul>
                       </li>
                     )
-
               })}
             </ul>
           </main>
-      </div>
+      </>
     );
   }
 }
