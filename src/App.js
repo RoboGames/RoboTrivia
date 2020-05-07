@@ -11,48 +11,44 @@ class App extends Component {
       resultsArray:[],
       questionArray:[],
       choiceArray:[],
+      currentQuestion:'',
+      currentAnswers:[]
     }
   }
 
 
-  //  Answer Array
-  answerLibrary = (resultsArray)=>{
-    const choiceTemp = []
-     resultsArray.forEach((result,i)=>{
-      //  push incorrect choices in to the choice array
-       choiceTemp.push(result.incorrect_answers);
+  //  Choices Array
+  choiceLibrary = (result)=>{
+    //  push incorrect choices in to the choice array
+    const choiceTemp = result.incorrect_answers
 
-       const numberOfChoices = result.incorrect_answers.length +1
-      
-      //  randomizing function to randomize the correct answer index
-       let correctAnswerIndex = Math.floor(Math.random() * numberOfChoices);
+    const numberOfChoices = result.incorrect_answers.length + 1
 
-      // add correct answer in a random position of the choice array
-       choiceTemp[i].splice(correctAnswerIndex, 0 , result.correct_answer)
+    //  randomizing function to randomize the correct answer index
+    let randomIndex = Math.floor(Math.random() * numberOfChoices);
 
-       this.setState({
-         choiceArray:choiceTemp
-       })
-     })
+    // add correct answer in a random position of the choice array
+    choiceTemp.splice(randomIndex, 0, result.correct_answer)
+
+    // this.setState({
+    //   choiceArray: choiceTemp
+    // })
+    return choiceTemp
   }
 
 
-  // QuestionArray
-  questionLibrary = (resultsArray) => {
-    const questionTemp =[]
-    resultsArray.forEach((result, i) => {
-      questionTemp.push({
-        question: result.question,
-        choices: this.state.choiceArray,
-        
-      })
-      this.setState({
-        questionArray: questionTemp
-      })
-      
-    })
-    console.log(this.state.choiceArray)
-  }
+  // // QuestionArray
+  // questionLibrary = (resultsArray) => {
+  //   const questionTemp =[]
+  //   resultsArray.forEach((result, i) => {
+  //     questionTemp.push(result.question)
+  //     this.setState({
+  //       questionArray: questionTemp,
+  //       })
+  //   })
+  // }
+
+
 
 
   callApi = (category, difficulty, numberOfPlayers) =>{
@@ -73,15 +69,7 @@ class App extends Component {
         resultsArray:response.data.results,
       
       })
-      const questionLibrary = this.questionLibrary(this.state.resultsArray)
-      const answerLibrary = this.answerLibrary(this.state.resultsArray)
-
     })
-  }
-
-  componentDidMount() {
-    this.callApi()
-
   }
 
   render(){
@@ -90,23 +78,31 @@ class App extends Component {
           <Header
             callApiFunc = {this.callApi}
           />
-          {/* <main>
+          <main>
             <ul>
-              {this.state.questionArray.map((question,i)=>{
-                let questionTitle = question.question
-                let answer = question.answer
+              {this.state.resultsArray.map((result,i)=>{
+                let choices = this.choiceLibrary(result)
+                console.log(choices)
+                let questionTitle = result.question
                     return (
                       <li className="questionContainer" key={i}>
                         <h2>{questionTitle}</h2>
-                        <form action="">
-                          <input type="text"/>
-                        </form>
+                        <ul className = "answerContainer">
+                          {choices.map((choice)=>{
+                            return(
+                              <li>
+                                <button>{choice}</button>
+                              </li>
+
+                            )
+                          })}
+                        </ul>
                       </li>
                     )
 
               })}
             </ul>
-          </main> */}
+          </main>
       </div>
     );
   }
