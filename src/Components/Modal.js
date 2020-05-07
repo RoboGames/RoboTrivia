@@ -6,23 +6,21 @@ export default class Modal extends Component {
          return null
       }
       return (
-         <form action="">
-            <p>Choose Your Nicknames</p>
-            <form action="">
-               <div className="criteriaSection">
-                  {
-                     this.props.playerArray.map((player, key) =>{
-                        return(
-                           <Fragment>
-                              <label htmlFor="name" className='sr-only'>Player {key + 1}</label>
-                              <input type="text" id = {key} onChange={this.props.getNicknameFunc} className="nickname" name="player" placeholder = {"Player " + (key + 1)}/>
-                           </Fragment>
-                        )
-                     })
-                  }
-               </div>
-            </form>
-         </form>
+         <div>
+               <p>Choose Your Nicknames</p>
+                  <div className="criteriaSection">
+                     {
+                        this.props.playerArray.map((player, key) =>{
+                           return(
+                              <div key={"nickname" + key}>
+                                 <label htmlFor="name" className='sr-only' key={"label" + key}>Player {key + 1}</label>
+                                 <input type="text" key ={key} id = {key} onChange={this.props.getNicknameFunc} className="nickname" name="nicknameInput" placeholder = {"Player " + (key + 1)} value={player.nickname}/>
+                              </div>
+                           )
+                        })
+                     }
+                  </div>
+         </div>
       )
    }
 }
