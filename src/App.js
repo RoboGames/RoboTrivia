@@ -9,26 +9,68 @@ class App extends Component {
   constructor(){
     super();
     this.state={
+      resultsArray:[],
       questionArray:[],
+      choiceArray:[],
+      currentQuestion:'',
+      currentAnswers:[],
+      questionArray: [],
       isPlaying: false,
       randomRobos: []
     }
   }
 
+
+  //  Choices Array
+  choiceLibrary = (result)=>{
+    //  push incorrect choices in to the choice array
+    const choiceTemp = result.incorrect_answers
+
+    const numberOfChoices = result.incorrect_answers.length + 1
+
+    //  randomizing function to randomize the correct answer index
+    let randomIndex = Math.floor(Math.random() * numberOfChoices);
+
+    // add correct answer in a random position of the choice array
+    choiceTemp.splice(randomIndex, 0, result.correct_answer)
+
+    // this.setState({
+    //   choiceArray: choiceTemp
+    // })
+    return choiceTemp
+  }
+
+
+  // // QuestionArray
+  // questionLibrary = (resultsArray) => {
+  //   const questionTemp =[]
+  //   resultsArray.forEach((result, i) => {
+  //     questionTemp.push(result.question)
+  //     this.setState({
+  //       questionArray: questionTemp,
+  //       })
+  //   })
+  // }
+
+
+
   callApi = (category, difficulty, numberOfPlayers, players, isPlaying) =>{
     console.log(category, difficulty, numberOfPlayers)
     let numberOfQuestions = numberOfPlayers * 5
-    console.log(numberOfQuestions)
     axios({
-      url: 'http://jservice.io/api/clues',
-      method:'GET',
+      url: 'https://opentdb.com/api.php',
       params: {
         category: category,
-        value:difficulty
+        amount: numberOfQuestions,
+        type:'multiple',
+        difficulty:difficulty
       }
     }).then((response) => {
       console.log(response);
+
       this.setState({
+        resultsArray:response.data.results,
+      
         numberOfPlayers: numberOfPlayers,
         questionArray:response.data,
         players: players,
@@ -64,15 +106,23 @@ class App extends Component {
               avatars = {this.state.randomRobos}
             />
             <ul>
-              {this.state.questionArray.map((question,i)=>{
-                let questionTitle = question.question
-                let answer = question.answer
+              {this.state.resultsArray.map((result,i)=>{
+                let choices = this.choiceLibrary(result)
+                console.log(choices)
+                let questionTitle = result.question
                     return (
                       <li className="questionContainer" key={i}>
                         <h2>{questionTitle}</h2>
-                        <form action="">
-                          <input type="text"/>
-                        </form>
+                        <ul className = "answerContainer">
+                          {choices.map((choice)=>{
+                            return(
+                              <li>
+                                <button>{choice}</button>
+                              </li>
+
+                            )
+                          })}
+                        </ul>
                       </li>
                     )
               })}
