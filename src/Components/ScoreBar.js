@@ -8,7 +8,6 @@ class ScoreBar extends Component {
         }
     }
     render() {
-        console.log(this.props.avatars)
         if (this.props.isPlaying === false) {
             return null
         }else{
@@ -23,9 +22,6 @@ class ScoreBar extends Component {
                                     <p>Score: {this.props.playerData[key].score}</p></div>
                         })
                     }       
-                </div>
-                <div className='currentPlayer'>
-                    <p>{this.props.playerData[0].nickname} it's your turn!</p>
                 </div>
             </div>
             )

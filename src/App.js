@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Components/Header';
 import ScoreBar from './Components/ScoreBar'
+import GameArea from './Components/GameArea'
 import './Styles/styles.scss';
 
 import axios from 'axios';
@@ -9,32 +10,66 @@ class App extends Component {
   constructor(){
     super();
     this.state={
+      resultsArray:[],
       questionArray:[],
+      currentQuestion:'',
+      questionArray: [],
       isPlaying: false,
-      randomRobos: []
+      randomRobos: [],
+      currentQuestion:0
     }
   }
 
+
+  //  Choices Array
+  choiceLibrary = (result)=>{
+    //  push incorrect choices in to the choice array
+    const choiceTemp = result.incorrect_answers
+    const numberOfChoices = result.incorrect_answers.length + 1
+    //  randomizing function to randomize the correct answer index
+    const randomIndex = Math.floor(Math.random() * numberOfChoices);
+    // add correct answer in a random position of the choice array
+    choiceTemp.splice(randomIndex, 0, result.correct_answer)
+    return choiceTemp
+  }
+
+  populateChoices = () =>{
+    const choiceLibrary = []
+    this.state.resultsArray.map((result, i) =>{
+      choiceLibrary.push({
+        question: result.question,
+        choices: this.choiceLibrary(result),
+        correct_answer: result.correct_answer
+      })
+    })
+    this.setState({
+      renderQuestions: choiceLibrary
+    })
+  }
+
+
+
+
   callApi = (category, difficulty, numberOfPlayers, players, isPlaying) =>{
-    console.log(category, difficulty, numberOfPlayers)
     let numberOfQuestions = numberOfPlayers * 5
-    console.log(numberOfQuestions)
     axios({
-      url: 'http://jservice.io/api/clues',
-      method:'GET',
+      url: 'https://opentdb.com/api.php',
       params: {
         category: category,
-        value:difficulty
+        amount: numberOfQuestions,
+        type:'multiple',
+        difficulty:difficulty
       }
     }).then((response) => {
-      console.log(response);
       this.setState({
+        resultsArray:response.data.results,
         numberOfPlayers: numberOfPlayers,
         questionArray:response.data,
         players: players,
         isPlaying: isPlaying
       }, () =>{
         this.generateAvatar();
+        this.populateChoices();
       })
     })
   }
@@ -61,22 +96,12 @@ class App extends Component {
             <ScoreBar
               playerData={this.state.players} 
               isPlaying={this.state.isPlaying}
-              avatars = {this.state.randomRobos}
+              avatars={this.state.randomRobos}
             />
-            <ul>
-              {this.state.questionArray.map((question,i)=>{
-                let questionTitle = question.question
-                let answer = question.answer
-                    return (
-                      <li className="questionContainer" key={i}>
-                        <h2>{questionTitle}</h2>
-                        <form action="">
-                          <input type="text"/>
-                        </form>
-                      </li>
-                    )
-              })}
-            </ul>
+            <GameArea 
+            isPlaying={this.state.players} 
+            playerData={this.state.players} 
+            />
           </main>
       </>
     );
