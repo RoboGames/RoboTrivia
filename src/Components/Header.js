@@ -13,7 +13,6 @@ class Header extends Component {
     }
 
     showModal = (e) =>{
-        e.preventDefault();
         if(this.state.numberOfPlayers > 0){
             this.setState({
                 showModal: true
@@ -26,7 +25,10 @@ class Header extends Component {
     }
 
     setPlayers = () => {
-        let players = Array(parseInt(this.state.numberOfPlayers)).fill({})
+        let players = Array(parseInt(this.state.numberOfPlayers)).fill({
+        nickname:"",
+        score: 0
+        })
         this.setState({
             players: players
         })
