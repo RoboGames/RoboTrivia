@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 export class ScoreBar extends Component {
     render() {
-        console.log(this.props.avatars)
         if (this.props.isPlaying === false) {
             return null
         }else{
