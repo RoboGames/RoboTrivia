@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Components/Header';
 import ScoreBar from './Components/ScoreBar'
+import GameArea from './Components/GameArea'
 import './Styles/styles.scss';
 
 import axios from 'axios';
@@ -103,30 +104,12 @@ class App extends Component {
             <ScoreBar
               playerData={this.state.players} 
               isPlaying={this.state.isPlaying}
-              avatars = {this.state.randomRobos}
+              avatars={this.state.randomRobos}
             />
-            <ul>
-              {this.state.resultsArray.map((result,i)=>{
-                let choices = this.choiceLibrary(result)
-                console.log(choices)
-                let questionTitle = result.question
-                    return (
-                      <li className="questionContainer" key={i}>
-                        <h2>{questionTitle}</h2>
-                        <ul className = "answerContainer">
-                          {choices.map((choice)=>{
-                            return(
-                              <li>
-                                <button>{choice}</button>
-                              </li>
-
-                            )
-                          })}
-                        </ul>
-                      </li>
-                    )
-              })}
-            </ul>
+            <GameArea 
+            isPlaying={this.state.players} 
+            playerData={this.state.players} 
+            />
           </main>
       </>
     );

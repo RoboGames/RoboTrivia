@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
 
-export class ScoreBar extends Component {
+class ScoreBar extends Component {
+    constructor(){
+        super();
+        this.state = {
+            currentPlayer: ''
+        }
+    }
     render() {
         if (this.props.isPlaying === false) {
             return null
