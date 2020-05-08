@@ -12,6 +12,7 @@ class GameArea extends Component {
         }
     }
 
+
     componentDidUpdate(prevProps) {
         if (this.props.playerData !== prevProps.playerData) {
             this.setState({
@@ -49,6 +50,7 @@ class GameArea extends Component {
                 index: (this.state.index + 1)
             })
         } 
+
     }
 
     render() {
@@ -70,6 +72,7 @@ class GameArea extends Component {
                             {this.props.renderQuestions[this.state.index].choices.map((choice)=>{
                                 return(
                                     <button onClick={this.nextQuestion} value={choice}>{choice}</button>
+
                                 )
                             })}
                     </div>

@@ -53,7 +53,6 @@ class App extends Component {
     })
   }
 
-
   callApi = (category, difficulty, numberOfPlayers, players, isPlaying) =>{
     let numberOfQuestions = numberOfPlayers * 5
     axios({
@@ -65,20 +64,23 @@ class App extends Component {
         difficulty:difficulty
       }
     }).then((response) => {
-      this.setState({
-        resultsArray:response.data.results,
-        numberOfPlayers: numberOfPlayers,
-        questionArray:response.data,
-        players: players,
-        isPlaying: isPlaying
-      }, () =>{
-        this.generateAvatar();
-        this.populateChoices();
-      })
+        this.setState({
+          resultsArray:response.data.results,
+          numberOfPlayers: numberOfPlayers,
+          questionArray:response.data,
+          players: players,
+          isPlaying: isPlaying
+        }, () =>{
+          this.generateAvatar();
+          this.populateChoices();
+        })
 
       if(this.state.resultsArray.length > 0){
         this.smoothScroll();
       }
+      // error handling: when api call fails, alert user
+    }).catch(error => {
+      alert('Sorry, failed to load questions ')
     })
   }
 
