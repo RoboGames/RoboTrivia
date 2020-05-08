@@ -50,18 +50,13 @@ class GameArea extends Component {
             })
         } 
     }
-    // let playerNumber = this.state.currentPlayer + 1;
-    // If currentplayer > playerarray.lenght -1 
-    // then set playernumber back to 0
-    // in setState, set currentplayer: playernumber
-
 
     render() {
             return (
                 <>
                 <ScoreBar isPlaying={this.props.isPlaying} 
                         renderQuestions={this.props.renderQuestions}
-                        avatars={this.props.randomRobos}
+                        avatars={this.props.avatars}
                         playerData={this.state.allPlayers}/>
 
                 <div className='currentPlayer'>
