@@ -3,7 +3,7 @@ header{
     // background gradient
     background: rgb(65,234,212);
     background: linear-gradient(230deg, rgba(65,234,212,0.59) 7%, rgba(185,19,114,0.62) 98%);
-    height: 100vh;
+    min-height: 100vh;
     h1{
         font-family: $headingFont;
         font-size:7rem;
@@ -23,22 +23,60 @@ form{
     align-items: center;
     .criteriaSection{
         display: flex;
+        flex-wrap: wrap;
         justify-content: center;
         font-family: $bodyFont;
+        
     }
-    .criteriaType{
+    .criteriaType {
+        position: relative;
         display:flex;
         flex-direction: column;
         margin:1rem 2rem;
-        position: relative;
-    }
+       
+      }
+      
+      .criteriaType select {
+        background-color: rgb(143, 228, 216);
+        color: black;
+        padding: 12px;
+        border: none;
+        font-size:0.9rem;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+        -webkit-appearance: button;
+        appearance: button;
+        outline: none;
+        width:12rem;
+        height:2.5rem;
+      }
+      
+      .criteriaType::before {
+        content: "\f13a";
+        font-family: FontAwesome;
+        position: absolute;
+        bottom:0;
+        right: 0;
+        width: 20%;
+        height: 2.5rem;
+        text-align: center;
+        font-size: 1rem;
+        line-height: 2.5rem;
+        color: $colorPurple;
+        background-color: rgba(206, 186, 186, 0.1);
+        pointer-events: none;
+      }
+      
+      .criteriaType:hover::before {
+        // color: rgba(255, 255, 255, 0.6);
+        background-color:  $colorBlue;
+      }
 
     label{
         font-size:1.5rem;
         padding-bottom: 0.4rem;
     }
     
-    select, .nickname{
+    .nickname{
         width:9rem;
         margin:0 auto;
         padding: 0.5rem;
@@ -47,27 +85,12 @@ form{
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
+       
     }
     .nickname{
         margin: 0.5rem;
     }
-    .criteriaType:after{
-        // ---from codepen---
-        content: '\f078';
-        font: normal normal normal 17px/1 FontAwesome;
-        // ----------------
-        font-size: 1rem;
-        color: $colorPurple;
-        right:2rem;
-        top: 2.7rem;
-        position: absolute;
-        pointer-events: none;
-    }
 
-    .criteriaTypeTwo{
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
     option{
         font-family: $bodyFont;
         font-size:0.9rem;
@@ -92,7 +115,33 @@ form{
         background-color: $colorBlue;
     }
 }
-
+@media (max-width:920px){
+    header{
+        
+        h1{
+            font-size: 5rem;
+        }
+        i{
+            font-size:3rem;
+        }
+       } 
+    form{
+        label{
+        font-size:1rem;
+       
+        }
+        .criteriaType{
+            margin:1rem 1rem;
+            
+        }
+        .criteriaType:after{
+           
+            right:1.4rem;
+            top: 2.1rem; 
+        }
+        
+    }
+ }
 @media (max-width:600px){
    .criteriaSection{
         flex-direction: column;
@@ -100,5 +149,6 @@ form{
     select{
         width:15%;
     }
+  
 }
 
