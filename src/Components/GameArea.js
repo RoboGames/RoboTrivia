@@ -17,17 +17,20 @@ class GameArea extends Component {
     render() {
         console.log(this.props.renderQuestions)
             return (
-                <div className='currentPlayer'>
+                <div className='currentPlayer gameArea wrapper'>
                     {
-                        this.props.playerData ? <h3>{this.props.playerData[0].nickname} its your turn!</h3>:
+                        this.props.playerData ? <h3 className="animate__animated animate__tada">{this.props.playerData[0].nickname} its your turn!</h3>:
                         null
                     }
+
+                 
                     {this.props.renderQuestions.length > 0 && this.state.index < this.props.renderQuestions.length
-                     ? <div>
-                            <h3>{this.props.renderQuestions[this.state.index].question}</h3>
+                     ? <div className="questionPart">
+                            <h3 className="question">{this.props.renderQuestions[this.state.index].question}</h3>
+
                             {this.props.renderQuestions[this.state.index].choices.map((choice)=>{
                                 return(
-                                    <button onClick={this.nextQuestion}>{choice}</button>
+                                    <button className="answers" onClick={this.nextQuestion}>{choice}</button>
                                 )
                             })}
                      </div>

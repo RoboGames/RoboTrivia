@@ -6,7 +6,7 @@ export default class Modal extends Component {
          return null
       }
       return (
-         <div>
+         <div className="wrapper">
                <p>Choose Your Nicknames</p>
                   <div className="criteriaSection">
                      {

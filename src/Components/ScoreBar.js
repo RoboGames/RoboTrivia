@@ -13,7 +13,7 @@ class ScoreBar extends Component {
         }else{
             return (
                 <div>
-                    <div className='scorebar'>
+                    <div className="scorebar">
                     {
                         this.props.avatars.map((robo, key) => {
                         return <div className="playerAvatar">
