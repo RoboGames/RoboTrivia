@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Header from './Components/Header';
-import ScoreBar from './Components/ScoreBar'
 import GameArea from './Components/GameArea'
 import './Styles/styles.scss';
 
@@ -104,12 +103,12 @@ class App extends Component {
             callApiFunc = {this.callApi}
           />
           <main className='gameArea' ref={this.gameRef}>
-            <ScoreBar
+            {/* <ScoreBar
               playerData={this.state.players} 
-              isPlaying={this.state.isPlaying}
-              avatars={this.state.randomRobos}
-            />
+            /> */}
             <GameArea 
+            avatars={this.state.randomRobos}
+            isPlaying={this.state.isPlaying}
             playerData={this.state.players} 
             renderQuestions = {this.state.renderQuestions}
             />
