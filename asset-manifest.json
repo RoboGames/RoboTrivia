@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/RoboTrivia/static/css/main.54afe0a5.chunk.css",
+    "main.js": "/RoboTrivia/static/js/main.2e8bf65c.chunk.js",
+    "main.js.map": "/RoboTrivia/static/js/main.2e8bf65c.chunk.js.map",
+    "runtime-main.js": "/RoboTrivia/static/js/runtime-main.ae60a656.js",
+    "runtime-main.js.map": "/RoboTrivia/static/js/runtime-main.ae60a656.js.map",
+    "static/js/2.cbc68a6e.chunk.js": "/RoboTrivia/static/js/2.cbc68a6e.chunk.js",
+    "static/js/2.cbc68a6e.chunk.js.map": "/RoboTrivia/static/js/2.cbc68a6e.chunk.js.map",
+    "index.html": "/RoboTrivia/index.html",
+    "precache-manifest.ae662bd78f7e5ae631842fbda7c1ab66.js": "/RoboTrivia/precache-manifest.ae662bd78f7e5ae631842fbda7c1ab66.js",
+    "service-worker.js": "/RoboTrivia/service-worker.js",
+    "static/css/main.54afe0a5.chunk.css.map": "/RoboTrivia/static/css/main.54afe0a5.chunk.css.map",
+    "static/js/2.cbc68a6e.chunk.js.LICENSE.txt": "/RoboTrivia/static/js/2.cbc68a6e.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ae60a656.js",
+    "static/js/2.cbc68a6e.chunk.js",
+    "static/css/main.54afe0a5.chunk.css",
+    "static/js/main.2e8bf65c.chunk.js"
+  ]
+}
