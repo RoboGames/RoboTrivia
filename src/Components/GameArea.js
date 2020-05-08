@@ -8,19 +8,21 @@ class GameArea extends Component {
         }
     }
     nextQuestion = () => {
-        this.setState({
-            index: (this.state.index + 1)
-        })
+            this.setState({
+                index: (this.state.index + 1)
+            })
+
+
     }
     render() {
-        console.log(this.props.renderQuestions[0])
+        console.log(this.props.renderQuestions)
             return (
                 <div className='currentPlayer'>
                     {
                         this.props.playerData ? <h3>{this.props.playerData[0].nickname} its your turn!</h3>:
                         null
                     }
-                    {this.props.renderQuestions.length > 0
+                    {this.props.renderQuestions.length > 0 && this.state.index < this.props.renderQuestions.length
                      ? <div>
                             <h3>{this.props.renderQuestions[this.state.index].question}</h3>
                             {this.props.renderQuestions[this.state.index].choices.map((choice)=>{
