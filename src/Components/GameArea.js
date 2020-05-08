@@ -49,8 +49,7 @@ class GameArea extends Component {
                 playerIndex: 0,
                 index: (this.state.index + 1)
             })
-        } 
-
+        }
     }
 
     render() {
@@ -63,22 +62,35 @@ class GameArea extends Component {
 
                 <div className='currentPlayer'>
                     {
-                        this.state.allPlayers.length > 0 ? <h3>{this.state.allPlayers[this.state.playerIndex].nickname} its your turn!</h3>:
-                        null
+                        this.state.allPlayers.length > 0 && this.state.index <= this.props.renderQuestions.length - 1
+                        ? <h3>{this.state.allPlayers[this.state.playerIndex].nickname} its your turn!</h3>
+                        : null
                     }
-                    {this.props.renderQuestions.length > 0
-                    ? <div>
-                            <h3>{this.props.renderQuestions[this.state.index].question}</h3>
-                            {this.props.renderQuestions[this.state.index].choices.map((choice)=>{
-                                return(
-                                    <button onClick={this.nextQuestion} value={choice}>{choice}</button>
 
-                                )
-                            })}
-                    </div>
-                    : null
-                    }   
-                    
+                    {
+                        this.props.renderQuestions.length === 0 
+                        ? null
+                        : <div>{this.state.index <= this.props.renderQuestions.length - 1
+                                ? <div>
+                                    <h3>{this.props.renderQuestions[this.state.index].question}</h3>
+                                    {this.props.renderQuestions[this.state.index].choices.map((choice)=>{
+                                    return(
+                                        <button onClick={this.nextQuestion} value={choice}>{choice}</button>
+                                    )
+                                    })}
+                                    </div>
+                                    : <div>
+                                        <h1>Thanks for Playing!</h1>
+                                        {
+                                            this.state.allPlayers.map((player) => {
+                                                return(
+                                                    <p>{player.nickname} your score is: {player.score}!</p>
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                }</div>   
+                    }
                 </div>
                 </>
             )
