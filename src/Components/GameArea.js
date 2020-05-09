@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ScoreBar from './ScoreBar'
+import firebase from '../firebase';
 
 class GameArea extends Component {
     constructor() {
@@ -8,10 +9,47 @@ class GameArea extends Component {
             allPlayers: [],
             index: 0,
             userScore: 0,
-            playerIndex: 0
+            playerIndex: 0,
+            highScores: []
         }
     }
 
+    // Pulls our data from firebase and is mapped and displayed at end of game on line 129
+    componentDidMount(){
+        const dbRef = firebase.database().ref();
+        dbRef.on('value', (result) => {
+            const data = result.val();
+            console.log(data);
+            const playerScores = []
+            for (let key in data) {
+                playerScores.push({
+                    userName: data[key].userName,
+                    userScore: data[key].userScore
+                })
+            }
+        this.setState({ 
+            highScores: playerScores
+        })
+    })
+    } 
+    
+    // Pushing data to firebase on game over
+    // Wrote this function to fire onClick where the IF statement is true - i.e. when we're on the last question execute this function and push data we have in our allPlayers array to firebase
+    // Not working currently; causes the webpage to not refresh to next question
+    // Also considered just firing this function when the game ends and the ternery operator displays the gameover/leaderboard
+    // For that see line 120
+    storeCurrentGame = () => {
+        if (this.state.index === this.props.renderQuestions.length - 1){
+            const dbRef = firebase.database().ref()
+            const playerInfo = {
+            userName: this.state.allPlayers.nickname,
+            userScore: this.state.allPlayers.score,
+            }
+            dbRef.push(playerInfo)
+        } else {
+            return null
+        }
+}
 
     componentDidUpdate(prevProps) {
         if (this.props.playerData !== prevProps.playerData) {
@@ -26,7 +64,6 @@ class GameArea extends Component {
         if (event.target.value === this.props.renderQuestions[this.state.index].correct_answer) {
             const cloneAllPlayers = [...this.state.allPlayers];
             cloneAllPlayers[this.state.playerIndex].score++;
-            console.log('Its LITT');
             this.setState({
                 allPlayers: cloneAllPlayers
 
@@ -80,11 +117,20 @@ class GameArea extends Component {
                                     })}
                                     </div>
                                     : <div>
+                                        {/* this.storeCurrentGame() to launch here once we run out of questions - couldnt get it to execute this is an option if we can get it to work */}
                                         <h1>Thanks for Playing!</h1>
                                         {
                                             this.state.allPlayers.map((player) => {
                                                 return(
                                                     <p>{player.nickname} your score is: {player.score}!</p>
+                                                )
+                                            })
+                                        }
+                                        <h1>Leaderboard:</h1>
+                                        {
+                                            this.state.highScores.map((player) => {
+                                                return (
+                                                <p>{player.userName}: {player.userScore}</p>
                                                 )
                                             })
                                         }

@@ -13,6 +13,8 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+export default firebase
+
 
   // A basic function that on submit pushes user data to firebase
 // Instead of onSubmit need to find a way for this to fire on game end - perhaps with a gameend function
@@ -29,18 +31,18 @@ firebase.initializeApp(firebaseConfig);
 // Displaying the highscores will be a simple map function of on componentDidMount that as well checks to make sure theres no empty data
  // Pull our database data and push the values into the notes array
 // componentDidMount() {
-//     const dbRef = firebase.database().ref();
-//     dbRef.on('value', (result) => {
-//         const data = result.val();
-//         const playerArray = []
-//         for (let key in data) {
-//             playerArray.push({
-//                 userName: data[key].userName,
-//                 userScore: data[key].userScore
-//             })
-//         }
-//         this.setState({
-//             highscores: noteArray
-//         })
-//     })
+    // const dbRef = firebase.database().ref();
+    // dbRef.on('value', (result) => {
+    //     const data = result.val();
+    //     const playerArray = []
+    //     for (let key in data) {
+    //         playerArray.push({
+    //             userName: data[key].userName,
+    //             userScore: data[key].userScore
+    //         })
+    //     }
+    //     this.setState({
+    //         highscores: noteArray
+    //     })
+    // })
 // }
