@@ -146,7 +146,7 @@ class GameArea extends Component {
                                             <button onClick = {(event)=>{this.storeCurrentGame(event, this.state.allPlayers)}}>Upload Your Score</button>
                                         </div>
                                         <div className = "leaderBoard">
-                                            <h2>Leaderboard:</h2>
+                                            <h2>Leaderboard</h2>
                                             <ol className = "leaderBoard">
                                                 {
                                                     this.state.highScores.map((player) => {
