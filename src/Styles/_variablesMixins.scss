@@ -7,3 +7,12 @@ $bodyFont: 'Hind Siliguri', sans-serif;
 $colorRed: #FF0022;
 $colorBlue: #41EAD4;
 $colorPurple: #B91372;
+$colorBrown:#5c5050;
+
+@mixin userInputStyling (){
+    width:9rem;
+    margin:0 auto;
+    padding: 0.5rem;
+    border-radius: 5px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+}

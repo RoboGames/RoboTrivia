@@ -61,23 +61,29 @@ class GameArea extends Component {
                         avatars={this.props.avatars}
                         playerData={this.state.allPlayers}/>
 
-                <div className='currentPlayer'>
-                    {
-                        this.state.allPlayers.length > 0 ? <h3>{this.state.allPlayers[this.state.playerIndex].nickname} its your turn!</h3>:
-                        null
-                    }
-                    {this.props.renderQuestions.length > 0
-                    ? <div>
-                            <h3>{this.props.renderQuestions[this.state.index].question}</h3>
-                            {this.props.renderQuestions[this.state.index].choices.map((choice)=>{
-                                return(
-                                    <button onClick={this.nextQuestion} value={choice}>{choice}</button>
+                <div className="gameArea">
+                    <div className = "wrapper">
+                        {
+                                this.state.allPlayers.length > 0 ? <h4 className="animate__animated animate__tada">Current Player: <span>{this.state.allPlayers[this.state.playerIndex].nickname}</span></h4>:
+                            null
+                        }
+                            {this.props.renderQuestions.length > 0 && this.state.index < this.props.renderQuestions.length
+                        ? <div className ="questionContainer">
+                                    <h3 className="question"><span>Q: </span>{this.props.renderQuestions[this.state.index].question}</h3>
+                                <ul>
+                                {this.props.renderQuestions[this.state.index].choices.map((choice)=>{
+                                    return(
+                                        <li>
+                                            <button className = "answersButton" onClick={this.nextQuestion} value={choice}>{choice}</button>
+                                        </li>
 
-                                )
-                            })}
+                                    )
+                                })}
+                                </ul>
+                        </div>
+                        : null
+                        }   
                     </div>
-                    : null
-                    }   
                     
                 </div>
                 </>

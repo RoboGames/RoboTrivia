@@ -6,7 +6,7 @@ export default class Modal extends Component {
          return null
       }
       return (
-         <div className="wrapper">
+         <div className="wrapper modal">
                <p>Choose Your Nicknames</p>
                   <div className="criteriaSection">
                      {
@@ -14,7 +14,7 @@ export default class Modal extends Component {
                            return(
                               <div key={"nickname" + key}>
                                  <label htmlFor="name" className='sr-only' key={"label" + key}>Player {key + 1}</label>
-                                 <input type="text" key ={key} id = {key} onChange={this.props.getNicknameFunc} className="nickname" name="nicknameInput" placeholder = {"Player " + (key + 1)} value={player.nickname}/>
+                                 <input type="text" key ={key} id = {key} onChange={this.props.getNicknameFunc} className="nicknameInput" name="nicknameInput" placeholder = {"Player " + (key + 1)} value={player.nickname}/>
                               </div>
                            )
                         })
