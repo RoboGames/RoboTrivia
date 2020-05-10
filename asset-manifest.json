@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/RoboTrivia/static/css/main.54afe0a5.chunk.css",
-    "main.js": "/RoboTrivia/static/js/main.2e8bf65c.chunk.js",
-    "main.js.map": "/RoboTrivia/static/js/main.2e8bf65c.chunk.js.map",
+    "main.css": "/RoboTrivia/static/css/main.a32a217d.chunk.css",
+    "main.js": "/RoboTrivia/static/js/main.c5695a48.chunk.js",
+    "main.js.map": "/RoboTrivia/static/js/main.c5695a48.chunk.js.map",
     "runtime-main.js": "/RoboTrivia/static/js/runtime-main.ae60a656.js",
     "runtime-main.js.map": "/RoboTrivia/static/js/runtime-main.ae60a656.js.map",
-    "static/js/2.cbc68a6e.chunk.js": "/RoboTrivia/static/js/2.cbc68a6e.chunk.js",
-    "static/js/2.cbc68a6e.chunk.js.map": "/RoboTrivia/static/js/2.cbc68a6e.chunk.js.map",
+    "static/js/2.3ff62e17.chunk.js": "/RoboTrivia/static/js/2.3ff62e17.chunk.js",
+    "static/js/2.3ff62e17.chunk.js.map": "/RoboTrivia/static/js/2.3ff62e17.chunk.js.map",
     "index.html": "/RoboTrivia/index.html",
-    "precache-manifest.ae662bd78f7e5ae631842fbda7c1ab66.js": "/RoboTrivia/precache-manifest.ae662bd78f7e5ae631842fbda7c1ab66.js",
+    "precache-manifest.b4ffb3e0cb1ce8bea0f9789d23003e77.js": "/RoboTrivia/precache-manifest.b4ffb3e0cb1ce8bea0f9789d23003e77.js",
     "service-worker.js": "/RoboTrivia/service-worker.js",
-    "static/css/main.54afe0a5.chunk.css.map": "/RoboTrivia/static/css/main.54afe0a5.chunk.css.map",
-    "static/js/2.cbc68a6e.chunk.js.LICENSE.txt": "/RoboTrivia/static/js/2.cbc68a6e.chunk.js.LICENSE.txt"
+    "static/css/main.a32a217d.chunk.css.map": "/RoboTrivia/static/css/main.a32a217d.chunk.css.map",
+    "static/js/2.3ff62e17.chunk.js.LICENSE.txt": "/RoboTrivia/static/js/2.3ff62e17.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.ae60a656.js",
-    "static/js/2.cbc68a6e.chunk.js",
-    "static/css/main.54afe0a5.chunk.css",
-    "static/js/main.2e8bf65c.chunk.js"
+    "static/js/2.3ff62e17.chunk.js",
+    "static/css/main.a32a217d.chunk.css",
+    "static/js/main.c5695a48.chunk.js"
   ]
 }
