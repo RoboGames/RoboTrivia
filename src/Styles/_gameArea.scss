@@ -29,6 +29,7 @@ main{
         justify-content: center;
         margin:0;
         padding:0;
+        position:relative;
     }
     .question{
         color:$colorBrown;
@@ -53,11 +54,58 @@ main{
         border-radius: 5px;
         width:20rem;
         background-color: #f5f0e3;
+        
     }
     .answersButton:hover{
         background-color: $colorBlue;
     }
+
+    .fas{
+        position:absolute;
+        right:48%;
+        top:6rem;
+    }
+
+    .scoreBoard {
+        display:flex;
+        justify-content: space-evenly;
+        h2,h3{
+            font-size:2rem;
+        }
+        li{
+            text-transform: uppercase;
+            text-align: left;
+            border-bottom: 2px solid $colorPurple;
+        }
+    }
+
+    .currentScoreBoard{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items:center;
+        button{
+            color:#fce0c9;
+            font-size:1.2rem;
+            font-family: $bodyFont;
+            margin:0.5rem 0;
+            padding:0.7rem;
+            border: none;
+            border-radius: 5px;
+            width:11rem;
+            background-color: rgb(204, 91, 155);
+        }
+        button:hover,button:focus{
+            background-color: $colorPurple;
+        }
+        li{
+            padding:0;
+            margin:0;
+        }
+    }
+    
 }
+
 
 
 @media(max-width:920px){

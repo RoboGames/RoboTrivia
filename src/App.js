@@ -103,9 +103,6 @@ class App extends Component {
             callApiFunc = {this.callApi}
           />
           <main className='gameArea' ref={this.gameRef}>
-            {/* <ScoreBar
-              playerData={this.state.players} 
-            /> */}
             <GameArea 
             avatars={this.state.randomRobos}
             isPlaying={this.state.isPlaying}
@@ -115,7 +112,7 @@ class App extends Component {
           </main>
 
           <footer>
-            <div calssName="wrapper">
+            <div className="wrapper">
               <p>Copyright <span aria-hidden="true">&copy;</span> 2020 by Aleksandar Nikolic, Jane Yuan, Maliheh Naderan and Punnet Birdi</p>
             </div>
           </footer>
