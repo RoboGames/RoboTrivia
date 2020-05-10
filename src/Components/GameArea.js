@@ -49,8 +49,7 @@ class GameArea extends Component {
                 playerIndex: 0,
                 index: (this.state.index + 1)
             })
-        } 
-
+        }
     }
 
     render() {
@@ -63,28 +62,41 @@ class GameArea extends Component {
 
                 <div className="gameArea">
                     <div className = "wrapper">
-                        {
-                                this.state.allPlayers.length > 0 ? <h4 className="animate__animated animate__tada">Current Player: <span>{this.state.allPlayers[this.state.playerIndex].nickname}</span></h4>:
-                            null
-                        }
-                            {this.props.renderQuestions.length > 0 && this.state.index < this.props.renderQuestions.length
-                        ? <div className ="questionContainer">
-                                    <h3 className="question"><span>Q: </span>{this.props.renderQuestions[this.state.index].question}</h3>
-                                <ul>
-                                {this.props.renderQuestions[this.state.index].choices.map((choice)=>{
-                                    return(
-                                        <li>
-                                            <button className = "answersButton" onClick={this.nextQuestion} value={choice}>{choice}</button>
-                                        </li>
-
-                                    )
-                                })}
-                                </ul>
-                        </div>
+                    {
+                        this.state.allPlayers.length > 0 && this.state.index <= this.props.renderQuestions.length - 1
+                        ? <h4 className="animate__animated animate__tada">Current Player: <span>{this.state.allPlayers[this.state.playerIndex].nickname}</span></h4>
                         : null
-                        }   
+                    }
+
+                    {
+                        this.props.renderQuestions.length === 0 
+                        ? null
+                        : <div>{this.state.index <= this.props.renderQuestions.length - 1
+                                ? <div className ="questionContainer">
+                                    <h3 className="question"><span>Q: </span>{this.props.renderQuestions[this.state.index].question}</h3>
+                                    <ul>
+                                        {this.props.renderQuestions[this.state.index].choices.map((choice)=>{
+                                        return(
+                                            <li>
+                                                <button className="answersButton" onClick={this.nextQuestion} value={choice}>{choice}</button>
+                                            </li>
+                                        )
+                                        })}
+                                    </ul>
+                                    </div>
+                                    : <div>
+                                        <h1>Thanks for Playing!</h1>
+                                        {
+                                            this.state.allPlayers.map((player) => {
+                                                return(
+                                                    <p>{player.nickname} your score is: {player.score}!</p>
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                }</div>   
+                    }
                     </div>
-                    
                 </div>
                 </>
             )
