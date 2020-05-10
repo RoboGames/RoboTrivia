@@ -113,6 +113,12 @@ class App extends Component {
             renderQuestions = {this.state.renderQuestions}
             />
           </main>
+
+          <footer>
+            <div calssName="wrapper">
+              <p>Copyright <span aria-hidden="true">&copy;</span> 2020 by Aleksandar Nikolic, Jane Yuan, Maliheh Naderan and Punnet Birdi</p>
+            </div>
+          </footer>
       </>
     );
   }
