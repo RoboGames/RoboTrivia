@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import ScoreBar from './ScoreBar'
 import firebase from '../firebase';
 
@@ -110,7 +110,11 @@ class GameArea extends Component {
                         ? null
                         : <div>{this.state.index <= this.props.renderQuestions.length - 1
                                 ? <div className ="questionContainer">
-                                    <h3 className="question"><span>Q: </span>{this.props.renderQuestions[this.state.index].question}</h3>
+                                    <h3 className="question">
+                                    <div dangerouslySetInnerHTML={{
+                                        __html: this.props.renderQuestions[this.state.index].question
+                                    }}></div>
+                                    </h3>
                                     <ul>
                                         {this.props.renderQuestions[this.state.index].choices.map((choice)=>{
                                         return(
@@ -149,6 +153,3 @@ class GameArea extends Component {
         }
     }
 export default GameArea
-// Created a lifted state of players in an array
-// On turn end 'answer submit' move to next player in array (setState of current player to next by Index)
-// Check current index of player then ++ (perhaps indexOf)
