@@ -58,7 +58,6 @@ class GameArea extends Component {
     // function to check if user got the correct answer or no, if yes, add 1 point to the user answering that question, if not, user score does not change,
     // then call iteratePlayer() to ask the next player to answer the next question
     nextQuestion = (event) => {
-        console.log(event.target.value);
         if (event.target.value === this.props.renderQuestions[this.state.index].correct_answer) {
             const cloneAllPlayers = [...this.state.allPlayers];
             cloneAllPlayers[this.state.playerIndex].score++;
@@ -138,7 +137,8 @@ class GameArea extends Component {
                                             {this.state.displayIncorrect ? <i className="far fa-meh animate__animated animate__tada"></i> : null}
                                     </div>
                                     // score board
-                                    : <div className = "scoreBoard">   
+                                    : <>
+                                    <div className = "scoreBoard">   
                                         <div className="currentScoreBoard">
                                             <h3>Thanks for Playing!</h3>
                                             <button onClick = {(event)=>{this.storeCurrentGame(event, this.state.allPlayers)}} ref="uploadBtn">Upload Your Score</button>
@@ -168,10 +168,9 @@ class GameArea extends Component {
                                                 }
                                             </ol>
                                         </div>
-                                        <div className="playAgain">
-                                            <button onClick={this.playAgain}>Play Again?</button>
-                                        </div>
                                     </div>
+                                    <button className="playAgainButton" onClick={this.playAgain}>Play Again?</button>
+                                    </>
                                 }</div>   
                     }
                     </div>
