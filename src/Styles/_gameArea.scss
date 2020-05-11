@@ -46,13 +46,9 @@ main{
         padding:0;
     }
     .answersButton{
+        @include buttonStyling;
         color:$colorBrown;
-        font-size:1.2rem;
-        font-family: $bodyFont;
         margin:0.5rem 0;
-        padding:0.7rem;
-        border: none;
-        border-radius: 5px;
         width:20rem;
         background-color: #f5f0e3;
         
@@ -95,13 +91,9 @@ main{
         justify-content: center;
         align-items:center;
         button{
+            @include buttonStyling;
             color:#fce0c9;
-            font-size:1.2rem;
-            font-family: $bodyFont;
             margin:0.5rem 0;
-            padding:0.7rem;
-            border: none;
-            border-radius: 5px;
             width:11rem;
             background-color: rgb(204, 91, 155);
         }
@@ -114,20 +106,16 @@ main{
         }
     }
 
-    .playAgain {
-        margin: auto 0;
-        
-        button {
-            color:#fce0c9;
-            font-size:1.2rem;
-            font-family: $bodyFont;
-            margin:0.5rem 0;
-            padding:0.7rem;
-            border: none;
-            border-radius: 5px;
-            width:11rem;
-            background-color: rgb(204, 91, 155);
-        }
+    .playAgainButton {
+        @include buttonStyling;
+        margin:0 auto 1rem auto ;
+        color:#fce0c9;
+        width:12rem;
+        background-color: rgb(204, 91, 155);
+
+    }
+    .playAgainButton:hover,.playAgainButton:focus{
+        background-color: $colorPurple;
     }
     
 }
@@ -204,7 +192,7 @@ main{
             font-size:1.7rem;
         }
         .answersButton{
-            width:15rem;
+            width:14rem;
         }
 
         .scoreBoard{
