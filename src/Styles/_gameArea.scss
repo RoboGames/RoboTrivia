@@ -79,6 +79,11 @@ main{
         }
     }
 
+    .highScoreBoard {
+        overflow: scroll;
+        height: 250px;
+    }
+
     .currentScoreBoard{
         display: flex;
         flex-direction: column;

@@ -8,11 +8,11 @@ class GameArea extends Component {
         this.state = {
             allPlayers: [],
             index: 0,
-            userScore: 0,
             playerIndex: 0,
             highScores: [],
             displayCorrect:false,
-            displayIncorrect:false
+            displayIncorrect:false,
+            sortedPlayers: []
         }
     }
 
@@ -21,8 +21,6 @@ class GameArea extends Component {
         const dbRef = firebase.database().ref();
         dbRef.on('value', (result) => {
             const data = result.val();
-            console.log(data);
-            console.log(Object.values(data))
             const playerScores = []
             for (let key in data) {
                 for (let i=0; i<data[key].length; i++) {
@@ -32,6 +30,10 @@ class GameArea extends Component {
                     })
                 }
             }
+            // Sort our returned firebase data to display highscores in order of highest to lowest
+            playerScores.sort((a, b) => {
+                return b.userScore - a.userScore
+            })
         this.setState({ 
             highScores: playerScores
         })
@@ -43,7 +45,6 @@ class GameArea extends Component {
             e.preventDefault();
             const dbRef = firebase.database().ref()
             dbRef.push(playerInfo)
-
 }
 
     componentDidUpdate(prevProps) {
@@ -90,6 +91,17 @@ class GameArea extends Component {
         }
     }
 
+    // This function should sort our current game and push it to a new array called 'sortedPlayers'
+    // I'm unsure where to call it to fire it but it takes our allPlayers data and sorts it by score
+    sortCurrentPlayerScores = () => {
+        const currentPlayers = [...this.state.allPlayers]
+        currentPlayers.sort((a, b) => {
+            return b.userScore - a.userScore
+        })
+        this.setState({ 
+            sortedPlayers: currentPlayers
+        })
+    }
     render() {
             return (
                 <>
@@ -130,13 +142,13 @@ class GameArea extends Component {
                                             {this.state.displayIncorrect ? <i className="far fa-meh animate__animated animate__tada"></i> : null}
                                     </div>
                                     // score board
-                                    : <div className = "scoreBoard">
-                                        {/* this.storeCurrentGame() to launch here once user submit score */}     
+                                    : <div className = "scoreBoard">   
                                         <div className="currentScoreBoard">
                                             <h3>Thanks for Playing!</h3>
                                             <ol >
+                                                {/* In theory or atleast according to stackoverflow this should work but it isnt, we should be able to concat sort then into mapping it but its just mapping */}
                                                 {
-                                                    this.state.allPlayers.map((player) => {
+                                                    this.state.sortedPlayers.map((player) => {
                                                         return(
                                                             <li>{player.nickname}: {player.score}</li>
                                                         )
@@ -147,7 +159,7 @@ class GameArea extends Component {
                                         </div>
                                         <div className = "leaderBoard">
                                             <h2>Leaderboard:</h2>
-                                            <ol className = "leaderBoard">
+                                            <ol className = "highScoreBoard">
                                                 {
                                                     this.state.highScores.map((player) => {
                                                         return (
