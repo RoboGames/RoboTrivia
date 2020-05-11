@@ -92,6 +92,12 @@ class GameArea extends Component {
         }
     }
 
+    // Play again button - a simple page refresh
+
+    playAgain() {
+        window.location.reload();
+    }
+
     render() {
             return (
                 <>
@@ -135,8 +141,8 @@ class GameArea extends Component {
                                     : <div className = "scoreBoard">   
                                         <div className="currentScoreBoard">
                                             <h3>Thanks for Playing!</h3>
-                                            <p>Congrats {this.state.allPlayers[0].nickname}, you win!</p>
-                                            <ol >
+                                            <button onClick = {(event)=>{this.storeCurrentGame(event, this.state.allPlayers)}} ref="uploadBtn">Upload Your Score</button>
+                                            <ul>
                                                 {/* Sort the current game and display the winner */}
                                                 {
                                                     this.state.allPlayers.sort((a, b) => {
@@ -144,14 +150,14 @@ class GameArea extends Component {
                                                     }).map((player, index) => {
                                                         return(
                                                             <li>{index + 1} - {player.nickname}: {player.score}</li>
-                                                        )
-                                                    })
-                                                }
-                                            </ol>
-                                            <button onClick = {(event)=>{this.storeCurrentGame(event, this.state.allPlayers)}} ref="uploadBtn">Upload Your Score</button>
+                                                            )
+                                                        })
+                                                    }
+                                            </ul>
+                                            <p>🎉{this.state.allPlayers[0].nickname} wins!!!🎉</p>
                                         </div>
                                         <div className = "leaderBoard">
-                                            <h2>Leaderboard:</h2>
+                                            <h3>Leaderboard:</h3>
                                             <ol className = "highScoreBoard">
                                                 {
                                                     this.state.highScores.map((player, index) => {
@@ -161,6 +167,9 @@ class GameArea extends Component {
                                                     })
                                                 }
                                             </ol>
+                                        </div>
+                                        <div className="playAgain">
+                                            <button onClick={this.playAgain}>Play Again?</button>
                                         </div>
                                     </div>
                                 }</div>   
