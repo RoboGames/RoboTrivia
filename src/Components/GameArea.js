@@ -8,11 +8,10 @@ class GameArea extends Component {
         this.state = {
             allPlayers: [],
             index: 0,
-            userScore: 0,
             playerIndex: 0,
             highScores: [],
             displayCorrect:false,
-            displayIncorrect:false,
+            displayIncorrect:false
         }
     }
 
@@ -21,8 +20,6 @@ class GameArea extends Component {
         const dbRef = firebase.database().ref();
         dbRef.on('value', (result) => {
             const data = result.val();
-            console.log(data);
-            console.log(Object.values(data))
             const playerScores = []
             for (let key in data) {
                 for (let i=0; i<data[key].length; i++) {
@@ -32,6 +29,10 @@ class GameArea extends Component {
                     })
                 }
             }
+            // Sort our returned firebase data to display highscores in order of highest to lowest
+            playerScores.sort((a, b) => {
+                return b.userScore - a.userScore
+            })
         this.setState({ 
             highScores: playerScores
         })
@@ -131,15 +132,18 @@ class GameArea extends Component {
                                             {this.state.displayIncorrect ? <i className="far fa-meh animate__animated animate__tada"></i> : null}
                                     </div>
                                     // score board
-                                    : <div className = "scoreBoard">
-                                        {/* this.storeCurrentGame() to launch here once user submit score */}     
+                                    : <div className = "scoreBoard">   
                                         <div className="currentScoreBoard">
                                             <h3>Thanks for Playing!</h3>
+                                            <p>Congrats {this.state.allPlayers[0].nickname}, you win!</p>
                                             <ol >
+                                                {/* Sort the current game and display the winner */}
                                                 {
-                                                    this.state.allPlayers.map((player) => {
+                                                    this.state.allPlayers.sort((a, b) => {
+                                                        return b.score - a.score
+                                                    }).map((player, index) => {
                                                         return(
-                                                            <li>{player.nickname}: {player.score}</li>
+                                                            <li>{index + 1} - {player.nickname}: {player.score}</li>
                                                         )
                                                     })
                                                 }
@@ -147,12 +151,12 @@ class GameArea extends Component {
                                             <button onClick = {(event)=>{this.storeCurrentGame(event, this.state.allPlayers)}} ref="uploadBtn">Upload Your Score</button>
                                         </div>
                                         <div className = "leaderBoard">
-                                            <h2>Leaderboard</h2>
-                                            <ol className = "leaderBoard">
+                                            <h2>Leaderboard:</h2>
+                                            <ol className = "highScoreBoard">
                                                 {
-                                                    this.state.highScores.map((player) => {
+                                                    this.state.highScores.map((player, index) => {
                                                         return (
-                                                        <li>{player.userName}: {player.userScore}</li>
+                                                        <li>{index + 1} - {player.userName}: {player.userScore}</li>
                                                         )
                                                     })
                                                 }
