@@ -4,6 +4,7 @@ main{
 }
 .gameArea{
     text-align: center;
+    height: auto;
     font-size: 2rem;
     background-color: rgba(65, 234, 212, 0.233);
 
@@ -110,6 +111,22 @@ main{
         ol{
             padding:0 0 1rem 0;
             
+        }
+    }
+
+    .playAgain {
+        margin: auto 0;
+        
+        button {
+            color:#fce0c9;
+            font-size:1.2rem;
+            font-family: $bodyFont;
+            margin:0.5rem 0;
+            padding:0.7rem;
+            border: none;
+            border-radius: 5px;
+            width:11rem;
+            background-color: rgb(204, 91, 155);
         }
     }
     
