@@ -91,17 +91,6 @@ class GameArea extends Component {
         }
     }
 
-    // This function should sort our current game and push it to a new array called 'sortedPlayers'
-    // I'm unsure where to call it to fire it but it takes our allPlayers data and sorts it by score
-    sortCurrentPlayerScores = () => {
-        const currentPlayers = [...this.state.allPlayers]
-        currentPlayers.sort((a, b) => {
-            return b.userScore - a.userScore
-        })
-        this.setState({ 
-            sortedPlayers: currentPlayers
-        })
-    }
     render() {
             return (
                 <>
@@ -145,12 +134,15 @@ class GameArea extends Component {
                                     : <div className = "scoreBoard">   
                                         <div className="currentScoreBoard">
                                             <h3>Thanks for Playing!</h3>
+                                            <p>Congrats {this.state.allPlayers[0].nickname}, you win!</p>
                                             <ol >
-                                                {/* In theory or atleast according to stackoverflow this should work but it isnt, we should be able to concat sort then into mapping it but its just mapping */}
+                                                {/* Sort the current game and display the winner */}
                                                 {
-                                                    this.state.sortedPlayers.map((player) => {
+                                                    this.state.allPlayers.sort((a, b) => {
+                                                        return b.score - a.score
+                                                    }).map((player, index) => {
                                                         return(
-                                                            <li>{player.nickname}: {player.score}</li>
+                                                            <li>{index + 1} - {player.nickname}: {player.score}</li>
                                                         )
                                                     })
                                                 }
@@ -161,9 +153,9 @@ class GameArea extends Component {
                                             <h2>Leaderboard:</h2>
                                             <ol className = "highScoreBoard">
                                                 {
-                                                    this.state.highScores.map((player) => {
+                                                    this.state.highScores.map((player, index) => {
                                                         return (
-                                                        <li>{player.userName}: {player.userScore}</li>
+                                                        <li>{index + 1} - {player.userName}: {player.userScore}</li>
                                                         )
                                                     })
                                                 }
