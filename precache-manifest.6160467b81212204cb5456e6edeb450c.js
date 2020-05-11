@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3e8f31a26edceb7a7c5c7ae069cac0bd",
+    "revision": "6f5665a9d34c4d436e5a2d53b7656384",
     "url": "/RoboTrivia/index.html"
   },
   {
-    "revision": "44df2c5de17fdf8dca3d",
-    "url": "/RoboTrivia/static/css/main.273a7140.chunk.css"
+    "revision": "c34b159f92b7af6cfed9",
+    "url": "/RoboTrivia/static/css/main.87f545e7.chunk.css"
   },
   {
     "revision": "cc85db4a2d935567694f",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/RoboTrivia/static/js/2.3ff62e17.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "44df2c5de17fdf8dca3d",
-    "url": "/RoboTrivia/static/js/main.e410e91b.chunk.js"
+    "revision": "c34b159f92b7af6cfed9",
+    "url": "/RoboTrivia/static/js/main.b6a6ca80.chunk.js"
   },
   {
     "revision": "0ed8d2dcca3b734e3508",
