@@ -102,7 +102,7 @@ class Header extends Component {
                         </select>
                         </div>
                     </div>
-                    <p>Each player will recieve 10 questions, players take turns answering unique questions</p>
+                    <p>Each player will recieve 5 questions, players take turns answering unique questions</p>
                     <Modal 
                     showModal = {this.state.showModal}
                     numberOfPlayers = {this.state.numberOfPlayers}
