@@ -11,8 +11,7 @@ class GameArea extends Component {
             playerIndex: 0,
             highScores: [],
             displayCorrect:false,
-            displayIncorrect:false,
-            sortedPlayers: []
+            displayIncorrect:false
         }
     }
 
@@ -45,6 +44,8 @@ class GameArea extends Component {
             e.preventDefault();
             const dbRef = firebase.database().ref()
             dbRef.push(playerInfo)
+            this.refs.uploadBtn.setAttribute("disabled", "disabled")
+
 }
 
     componentDidUpdate(prevProps) {
@@ -147,7 +148,7 @@ class GameArea extends Component {
                                                     })
                                                 }
                                             </ol>
-                                            <button onClick = {(event)=>{this.storeCurrentGame(event, this.state.allPlayers)}}>Upload Your Score</button>
+                                            <button onClick = {(event)=>{this.storeCurrentGame(event, this.state.allPlayers)}} ref="uploadBtn">Upload Your Score</button>
                                         </div>
                                         <div className = "leaderBoard">
                                             <h2>Leaderboard:</h2>
